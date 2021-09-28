@@ -3,14 +3,14 @@ import './css/style.css'
 import store from './store'
 import { CHANGE_INPUT , ADD , DEL, DA, CHECK } from './store/actionTypes'
 
-const todoData=[
+/* const todoData=[
     {todo:'Get up early',checked:true},
     {todo:'Do some meditation',checked:true},
     {todo:'Eat a healthy breakfast',checked:false},
     {todo:'Drink plenty of water',checked:false},
     {todo:'Exercise',checked:false},
     {todo:'Smile :)',checked:false},
-]
+] */
 
 class TodoList extends Component {
     constructor(props){
