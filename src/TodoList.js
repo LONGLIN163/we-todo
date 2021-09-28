@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './css/style.css'
 import store from './store'
+import { CHANGE_INPUT , ADD , DEL, DA, CHECK } from './store/actionTypes'
 
 const todoData=[
     {todo:'Get up early',checked:true},
@@ -15,7 +16,7 @@ class TodoList extends Component {
     constructor(props){
         super(props)
         this.state=store.getState();
-        //console.log(this.state)
+        console.log(this.state)
         this.changeInputValue= this.changeInputValue.bind(this)
         this.storeChange = this.storeChange.bind(this)
         store.subscribe(this.storeChange)
@@ -27,7 +28,7 @@ class TodoList extends Component {
 
     changeInputValue(e){
         const action ={
-            type:'changeInput',
+            type:CHANGE_INPUT,
             value:e.target.value
         }
         store.dispatch(action)
@@ -42,7 +43,7 @@ class TodoList extends Component {
 
     add(){
         const action={
-            type:"add"
+            type:ADD
         }
         store.dispatch(action)
     }
@@ -50,7 +51,7 @@ class TodoList extends Component {
     
     del(index){
         const action={
-            type:"del",
+            type:DEL,
             index
         }
         store.dispatch(action)
@@ -58,7 +59,7 @@ class TodoList extends Component {
 
     check(index){
         const action={
-            type:"check",
+            type:CHECK,
             index
         }
         store.dispatch(action)
@@ -66,11 +67,10 @@ class TodoList extends Component {
 
     delAll(){
         const action={
-            type:"delAll",
+            type:DA,
         }
         store.dispatch(action)
     }
-
 
     render() { 
         return ( 
@@ -80,7 +80,8 @@ class TodoList extends Component {
               <h2>Type something, then enter to put it on the list</h2>
               <input 
                 type="text" 
-                placeholder="Type something, then enter to put it on the list"
+                // placeholder={this.state.inputValue}
+                value={this.state.inputValue}
                 onChange={this.changeInputValue}
                 onKeyPress={this.handleEnterKey}
               />
@@ -102,7 +103,8 @@ class TodoList extends Component {
                                         return e.target.value
                                     }}
                                     onClick={this.check.bind(this,index)}/>
-                            <span>{item.todo}</span>
+                                <span>{item.todo}</span>
+
                             <button onClick={this.del.bind(this,index)}>Del</button>
                         </li>
                     })
