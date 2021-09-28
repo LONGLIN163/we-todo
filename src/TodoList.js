@@ -12,15 +12,13 @@ const todoData=[
 ]
 
 class TodoList extends Component {
-
     constructor(props){
         super(props)
         this.state=store.getState();
         //console.log(this.state)
+        this.changeInputValue= this.changeInputValue.bind(this)
         this.storeChange = this.storeChange.bind(this)
         store.subscribe(this.storeChange)
-        
-        this.changeInputValue= this.changeInputValue.bind(this)
     }
 
     storeChange(){
@@ -49,11 +47,37 @@ class TodoList extends Component {
         store.dispatch(action)
     }
 
+    
+    del(index){
+        const action={
+            type:"del",
+            index
+        }
+        store.dispatch(action)
+    }
+
+    check(index){
+        const action={
+            type:"check",
+            index
+        }
+        store.dispatch(action)
+    }
+
+    delAll(){
+        const action={
+            type:"delAll",
+        }
+        store.dispatch(action)
+    }
+
+
     render() { 
         return ( 
             
             <main>
-              <h2>Type something, and enter</h2>
+              {/* <h1>WEVENTURE Coding Challenge</h1> */}
+              <h2>Type something, then enter to put it on the list</h2>
               <input 
                 type="text" 
                 placeholder="Type something, then enter to put it on the list"
@@ -61,23 +85,24 @@ class TodoList extends Component {
                 onKeyPress={this.handleEnterKey}
               />
 
-              <h2>Click item to check the item</h2>
+              <h2>click item to check the item</h2>
             
               <ul>
                 {
-                     this.state.list.map( (item,index) => {
+                    this.state.list.map( (item,index) => {
                         return <li 
                                   key={item+index} 
                                   className={item.checked==true?'done':''}
+                                  onClick={this.check.bind(this,index)}
                                 >
                             <span>{item.todo}</span>
-                            <button>Del</button>
+                            <button onClick={this.del.bind(this,index)}>Del</button>
                         </li>
                     })
                 }
               </ul>
             
-              <button className="clearAll">Clear all</button>
+              <button className="clearAll" onClick={this.delAll}>Clear all</button>
             </main>
             
          );

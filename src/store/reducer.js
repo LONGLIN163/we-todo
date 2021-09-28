@@ -26,5 +26,28 @@ export default (state = defaultState,action)=>{
         console.log('add---newTodo---',newState)
         return newState;
     }
+
+    if (action.type==="del") {
+        let newState=JSON.parse(JSON.stringify(state))
+        newState.list.splice(action.index,1);
+        return newState;
+    }
+
+    if (action.type==="delAll") {
+        let newState=JSON.parse(JSON.stringify(state))
+        newState.list=[];
+        newState.inputValue="";
+        return newState;
+    }
+
+    if (action.type==="check") {
+        let newState=JSON.parse(JSON.stringify(state))
+        //console.log(action.index)
+        //console.log(newState.list[action.index])
+        newState.list[action.index].checked=!newState.list[action.index].checked;
+
+        return newState;
+    }
+
     return state
 }
