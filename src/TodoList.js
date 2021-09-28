@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './css/style.css'
 import store from './store'
-import { CHANGE_INPUT , ADD , DEL, DA, CHECK } from './store/actionTypes'
+import { changeInputAction , addAction , checkAction, delAction, delAllAction } from './store/actionCreators'
 
 /* const todoData=[
     {todo:'Get up early',checked:true},
@@ -14,14 +14,15 @@ import { CHANGE_INPUT , ADD , DEL, DA, CHECK } from './store/actionTypes'
 
 class TodoList extends Component {
     constructor(props){
+        console.log("***Hello! Please ignore the waring: A component is changing an uncontrolled......for this task if you see it.***")
         super(props)
         this.state=store.getState();
-        console.log(this.state)
         this.changeInputValue= this.changeInputValue.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+
         this.storeChange = this.storeChange.bind(this)
         store.subscribe(this.storeChange)
 
-        this.handleChange = this.handleChange.bind(this);
     }
 
     storeChange(){
@@ -29,54 +30,38 @@ class TodoList extends Component {
     } 
 
     changeInputValue(e){
-        const action ={
-            type:CHANGE_INPUT,
-            value:e.target.value
-        }
+        const action = changeInputAction(e.target.value)
         store.dispatch(action)
     }
 
     handleEnterKey = (e) => {
-        //console.log(e.nativeEvent.keyCode === 13)
         if(e.nativeEvent.keyCode === 13){
              this.add();
         }
     }
 
     add(){
-        const action={
-            type:ADD
-        }
+        const action=addAction();
         store.dispatch(action)
     }
 
     
     del(index){
-        const action={
-            type:DEL,
-            index
-        }
+        const action=delAction(index)
         store.dispatch(action)
     }
 
     check(index){
-        const action={
-            type:CHECK,
-            index
-        }
+        const action=checkAction(index)
         store.dispatch(action)
     }
 
     delAll(){
-        const action={
-            type:DA,
-        }
+        const action=delAllAction()
         store.dispatch(action)
     }
 
     handleChange(index,e) {
-        //console.log(e.target.value);
-        //console.log(index);
         this.check(index)
     }
 
@@ -84,18 +69,14 @@ class TodoList extends Component {
         return ( 
             
             <main>
-              {/* <h1>WEVENTURE Coding Challenge</h1> */}
-              <h2>Type something, then enter to put it on the list</h2>
+              <h2>Type something, then click 'enter'</h2>
               <input 
                 type="text" 
-                // placeholder={this.state.inputValue}
                 value={this.state.inputValue}
                 onChange={this.changeInputValue}
                 onKeyPress={this.handleEnterKey}
-              />
+              />   
 
-              <h2>click item to check the item</h2>
-            
               <ul>
                 {
                     this.state.list.map( (item,index) => {

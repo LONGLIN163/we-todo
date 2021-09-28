@@ -9,7 +9,6 @@ const defaultState = {
 }
 
 export default (state = defaultState,action)=>{
-    //console.log(state)
     if(action.type === CHANGE_INPUT){
         let newState = JSON.parse(JSON.stringify(state)) 
         newState.inputValue = action.value
@@ -17,15 +16,12 @@ export default (state = defaultState,action)=>{
     }
     if (action.type===ADD) {
         let newState=JSON.parse(JSON.stringify(state))
-        //console.log("add---newState1---",newState)
         const newTodo={
             todo:newState.inputValue,
             status:''
         };
-        //console.log('add---newTodo---',newTodo)
         newState.list.push(newTodo);
         newState.inputValue="";
-        //console.log('add---newState2---',newState)
         return newState;
     }
 
@@ -44,8 +40,6 @@ export default (state = defaultState,action)=>{
 
     if (action.type===CHECK) {
         let newState=JSON.parse(JSON.stringify(state))
-        //console.log(action.index)
-        //console.log(newState.list[action.index])
         newState.list[action.index].checked=!newState.list[action.index].checked;
 
         return newState;
