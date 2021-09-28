@@ -93,8 +93,15 @@ class TodoList extends Component {
                         return <li 
                                   key={item+index} 
                                   className={item.checked==true?'done':''}
-                                  onClick={this.check.bind(this,index)}
                                 >
+                                <input 
+                                    type="checkbox" 
+                                    name="check" 
+                                    className="checkitems" 
+                                    onChange={(e) => {
+                                        return e.target.value
+                                    }}
+                                    onClick={this.check.bind(this,index)}/>
                             <span>{item.todo}</span>
                             <button onClick={this.del.bind(this,index)}>Del</button>
                         </li>

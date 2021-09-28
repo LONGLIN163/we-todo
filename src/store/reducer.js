@@ -1,5 +1,5 @@
 const defaultState = {
-    inputValue : 'Write Something',
+    inputValue : 'Write Something here!!!',
     list:[
         {todo:'something 1',checked:true},
         {todo:'something 2',checked:false},
@@ -15,7 +15,7 @@ export default (state = defaultState,action)=>{
     }
     if (action.type==="add") {
         let newState=JSON.parse(JSON.stringify(state))
-        console.log("add---newState---",newState)
+        console.log("add---newState1---",newState)
         const newTodo={
             todo:newState.inputValue,
             status:''
@@ -23,7 +23,7 @@ export default (state = defaultState,action)=>{
         console.log('add---newTodo---',newTodo)
         newState.list.push(newTodo);
         newState.inputValue="";
-        console.log('add---newTodo---',newState)
+        console.log('add---newState2---',newState)
         return newState;
     }
 
