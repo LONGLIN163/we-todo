@@ -3,8 +3,12 @@ import { CHANGE_INPUT , ADD , DEL, DA, CHECK } from './actionTypes'
 const defaultState = {
     inputValue : 'Write Something here!!!',
     list:[
-        {todo:'something 1',checked:true},
-        {todo:'something 2',checked:false},
+        {todo:'Get up early',checked:true},
+        {todo:'Do some meditation',checked:true},
+        {todo:'Eat a healthy breakfast',checked:false},
+        {todo:'Drink plenty of water',checked:false},
+        {todo:'Exercise',checked:false},
+        {todo:'Smile :)',checked:false},
     ]
 }
 

@@ -3,15 +3,6 @@ import './css/style.css'
 import store from './store'
 import { changeInputAction , addAction , checkAction, delAction, delAllAction } from './store/actionCreators'
 
-/* const todoData=[
-    {todo:'Get up early',checked:true},
-    {todo:'Do some meditation',checked:true},
-    {todo:'Eat a healthy breakfast',checked:false},
-    {todo:'Drink plenty of water',checked:false},
-    {todo:'Exercise',checked:false},
-    {todo:'Smile :)',checked:false},
-] */
-
 class TodoList extends Component {
     constructor(props){
         console.log("***Hello! Please ignore the waring: A component is changing an uncontrolled......for this task if you see it.***")
