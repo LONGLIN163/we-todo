@@ -20,6 +20,8 @@ class TodoList extends Component {
         this.changeInputValue= this.changeInputValue.bind(this)
         this.storeChange = this.storeChange.bind(this)
         store.subscribe(this.storeChange)
+
+        this.handleChange = this.handleChange.bind(this);
     }
 
     storeChange(){
@@ -72,6 +74,12 @@ class TodoList extends Component {
         store.dispatch(action)
     }
 
+    handleChange(index,e) {
+        //console.log(e.target.value);
+        //console.log(index);
+        this.check(index)
+    }
+
     render() { 
         return ( 
             
@@ -99,10 +107,9 @@ class TodoList extends Component {
                                     type="checkbox" 
                                     name="check" 
                                     className="checkitems" 
-                                    onChange={(e) => {
-                                        return e.target.value
-                                    }}
-                                    onClick={this.check.bind(this,index)}/>
+                                    checked={item.checked}
+                                    onChange={this.handleChange.bind(this,index)}
+                                />
                                 <span>{item.todo}</span>
 
                             <button onClick={this.del.bind(this,index)}>Del</button>
